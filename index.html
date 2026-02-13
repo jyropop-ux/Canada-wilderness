@@ -1,0 +1,760 @@
+<!doctype html>
+<html lang="en">
+ <head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Our Canadian Wilderness Adventure</title>
+
+  <!-- Hosting-safe: removed Canva SDK scripts -->
+  <!-- <script src="/_sdk/element_sdk.js"></script> -->
+  <!-- <script src="/_sdk/data_sdk.js" type="text/javascript"></script> -->
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    html, body {
+      height: 100%;
+      width: 100%;
+      font-family: 'Georgia', 'Garamond', serif;
+      background: #0a0f14;
+      color: #d4d4d0;
+      scroll-behavior: smooth;
+    }
+
+    body { overflow-x: hidden; }
+
+    .section {
+      width: 100%;
+      height: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      text-align: center;
+      padding: 60px 40px;
+    }
+
+    .section-cover {
+      background: linear-gradient(135deg, #1a2f3a 0%, #0f1f2e 50%, #1a2a35 100%);
+    }
+
+    .section-cover::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 20% 50%, rgba(76, 130, 120, 0.1) 0%, transparent 50%),
+        radial-gradient(circle at 80% 80%, rgba(100, 140, 160, 0.08) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      animation: fadeInUp 1.2s ease-out;
+    }
+
+    .cover-title {
+      font-size: 48px;
+      font-weight: 300;
+      line-height: 1.4;
+      margin-bottom: 35px;
+      color: #e8e5e0;
+      letter-spacing: 0.5px;
+    }
+
+    .cover-desc {
+      font-size: 18px;
+      color: #a89f96;
+      margin-bottom: 20px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .scroll-cta {
+      font-size: 12px;
+      color: #8fa39e;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-top: 50px;
+      animation: bounce 2s infinite;
+    }
+
+    @keyframes bounce {
+      0%, 20%, 50%, 80%, 100% { transform: translateY(0); }
+      40% { transform: translateY(10px); }
+      60% { transform: translateY(5px); }
+    }
+
+    .section-intro {
+      background: linear-gradient(180deg, #0a0f14 0%, #1a2835 100%);
+    }
+
+    .section-intro::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        linear-gradient(180deg, rgba(79, 108, 100, 0.05) 0%, transparent 40%),
+        linear-gradient(180deg, transparent 60%, rgba(30, 50, 60, 0.08) 100%);
+      pointer-events: none;
+    }
+
+    .intro-main {
+      font-size: 36px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #e8e5e0;
+      margin-bottom: 40px;
+      letter-spacing: 0.3px;
+    }
+
+    .intro-text {
+      font-size: 17px;
+      line-height: 1.8;
+      color: #a89f96;
+      margin-bottom: 50px;
+      font-weight: 300;
+    }
+
+    .intro-nav-buttons {
+      display: flex;
+      gap: 12px;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    .nav-btn {
+      padding: 11px 26px;
+      background: rgba(103, 133, 120, 0.15);
+      border: 2px solid #6f8577;
+      color: #d4d4d0;
+      font-family: 'Georgia', serif;
+      font-size: 13px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      letter-spacing: 1.2px;
+      text-transform: uppercase;
+      font-weight: 400;
+    }
+
+    .nav-btn:hover {
+      background: rgba(103, 133, 120, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .destination-wrapper { display: flex; flex-direction: column; }
+
+    .destination-hero {
+      width: 100%;
+      height: 100%;
+      position: relative;
+      background-size: cover;
+      background-position: center;
+      display: flex;
+      align-items: center;
+      padding: 80px 60px;
+    }
+
+    .destination-hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(135deg, rgba(10, 15, 20, 0.45) 0%, rgba(15, 25, 35, 0.35) 100%);
+      pointer-events: none;
+    }
+
+    .destination-hero-content {
+      position: relative;
+      z-index: 2;
+      max-width: 700px;
+      text-align: left;
+    }
+
+    .section-label {
+      font-size: 12px;
+      color: #7a9189;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+      margin-bottom: 20px;
+      font-weight: 400;
+    }
+
+    .destination-title {
+      font-size: 44px;
+      font-weight: 300;
+      color: #e8e5e0;
+      margin-bottom: 20px;
+      line-height: 1.3;
+      letter-spacing: 0.3px;
+    }
+
+    .destination-subtitle {
+      font-size: 16px;
+      color: #c5bbb3;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .destination-content {
+      width: 100%;
+      min-height: 100%;
+      background: #0a0f14;
+      padding: 70px 60px;
+      position: relative;
+    }
+
+    .content-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      position: relative;
+      z-index: 2;
+      text-align: left;
+    }
+
+    .image-section {
+      width: 100%;
+      height: 400px;
+      background-size: cover;
+      background-position: center;
+      position: relative;
+      margin: 60px auto;
+      border-radius: 2px;
+    }
+
+    .image-section::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: linear-gradient(180deg, rgba(10, 15, 20, 0) 0%, rgba(10, 15, 20, 0.3) 100%);
+      pointer-events: none;
+    }
+
+    .subsection { margin-bottom: 50px; }
+
+    .subsection-title {
+      font-size: 13px;
+      color: #7a9189;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      margin-bottom: 16px;
+      font-weight: 400;
+    }
+
+    .subsection-text {
+      font-size: 16px;
+      line-height: 1.8;
+      color: #c5bbb3;
+      font-weight: 300;
+      margin-bottom: 20px;
+    }
+
+    .list-item {
+      font-size: 16px;
+      color: #c5bbb3;
+      line-height: 2;
+      padding-left: 24px;
+      position: relative;
+      font-weight: 300;
+    }
+
+    .list-item::before {
+      content: '◆';
+      position: absolute;
+      left: 0;
+      color: #6f8577;
+      font-size: 8px;
+    }
+
+    .action-buttons {
+      display: flex;
+      gap: 12px;
+      margin-top: 40px;
+      flex-wrap: wrap;
+    }
+
+    .action-btn {
+      flex: 1;
+      min-width: 160px;
+      padding: 12px 24px;
+      background: rgba(111, 133, 119, 0.15);
+      border: 2px solid #6f8577;
+      color: #d4d4d0;
+      font-family: 'Georgia', serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.4s ease;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      font-weight: 400;
+      text-decoration: none;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .action-btn:hover {
+      background: rgba(111, 133, 119, 0.3);
+      transform: translateY(-2px);
+    }
+
+    .nav-divider {
+      display: flex;
+      gap: 12px;
+      margin-top: 60px;
+      padding-top: 40px;
+      border-top: 1px solid rgba(111, 133, 119, 0.2);
+      flex-wrap: wrap;
+    }
+
+    .nav-scroll-btn {
+      padding: 10px 20px;
+      background: rgba(111, 133, 119, 0.1);
+      border: 1px solid rgba(111, 133, 119, 0.3);
+      color: #8fa39e;
+      font-family: 'Georgia', serif;
+      font-size: 12px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      letter-spacing: 0.8px;
+      font-weight: 400;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .nav-scroll-btn:hover { background: rgba(111, 133, 119, 0.25); }
+
+    .heart-btn {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      width: 50px;
+      height: 50px;
+      background: rgba(111, 133, 119, 0.2);
+      border: 2px solid #6f8577;
+      color: #d4d4d0;
+      cursor: pointer;
+      border-radius: 50%;
+      font-size: 24px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+      z-index: 100;
+    }
+
+    .heart-btn:hover { background: rgba(111, 133, 119, 0.4); transform: scale(1.1); }
+
+    .heart-btn.active {
+      background: rgba(200, 100, 100, 0.3);
+      border-color: #c86464;
+      color: #e89898;
+    }
+
+    .section-closing {
+      background: linear-gradient(135deg, #1a2f3a 0%, #0f1f2e 100%);
+    }
+
+    .section-closing::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background:
+        radial-gradient(circle at 30% 40%, rgba(79, 108, 100, 0.08) 0%, transparent 50%),
+        radial-gradient(circle at 70% 60%, rgba(100, 140, 160, 0.06) 0%, transparent 50%);
+      pointer-events: none;
+    }
+
+    .closing-main {
+      font-size: 40px;
+      font-weight: 300;
+      line-height: 1.6;
+      color: #e8e5e0;
+      margin-bottom: 30px;
+      letter-spacing: 0.3px;
+    }
+
+    .closing-sub {
+      font-size: 18px;
+      color: #a89f96;
+      margin-bottom: 40px;
+      line-height: 1.8;
+      font-weight: 300;
+    }
+
+    .option-divider {
+      height: 1px;
+      background: rgba(111, 133, 119, 0.15);
+      margin: 80px 0;
+    }
+
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    @media (max-width: 768px) {
+      .cover-title { font-size: 36px; }
+      .intro-main { font-size: 28px; }
+      .destination-title { font-size: 32px; }
+      .destination-hero { padding: 50px 30px; }
+      .destination-content { padding: 50px 30px; }
+      .closing-main { font-size: 32px; }
+      .image-section { height: 250px; }
+      .action-buttons { flex-direction: column; }
+      .action-btn { min-width: unset; }
+      .heart-btn { bottom: 20px; right: 20px; width: 45px; height: 45px; font-size: 20px; }
+      .section { padding: 40px 20px; }
+    }
+  </style>
+
+  <script src="https://cdn.tailwindcss.com/3.4.17" type="text/javascript"></script>
+ </head>
+
+ <body>
+  <div class="section section-cover">
+   <div class="content">
+    <h1 class="cover-title">Our Canadian Wilderness Adventure</h1>
+    <p class="cover-desc">Pick Our Escape</p>
+    <p class="scroll-cta">↓ Scroll to Explore ↓</p>
+   </div>
+  </div>
+
+  <div class="section section-intro">
+   <div class="content">
+    <p class="intro-main">I found four ways we could step out of normal life for a while.</p>
+    <p class="intro-text">Different landscapes. Different pace. Same idea — quiet, nature, and time together.</p>
+    <p class="intro-text">We don't need the perfect choice. Just the one we can already imagine living in.</p>
+    <div class="intro-nav-buttons">
+      <button class="nav-btn" onclick="document.getElementById('option1').scrollIntoView({behavior: 'smooth'})">Rainforest</button>
+      <button class="nav-btn" onclick="document.getElementById('option2').scrollIntoView({behavior: 'smooth'})">Lake Country</button>
+      <button class="nav-btn" onclick="document.getElementById('option3').scrollIntoView({behavior: 'smooth'})">Ocean Cliffs</button>
+      <button class="nav-btn" onclick="document.getElementById('option4').scrollIntoView({behavior: 'smooth'})">Live There</button>
+    </div>
+   </div>
+  </div>
+
+  <div class="destination-wrapper" id="option1">
+   <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1600&h=900&fit=crop');">
+    <div class="destination-hero-content">
+     <div class="section-label">Option 1</div>
+     <h2 class="destination-title">Rainforest Fjords</h2>
+     <p class="destination-subtitle">Coastal British Columbia</p>
+    </div>
+   </div>
+
+   <div class="destination-content">
+    <div class="content-wrapper">
+     <div class="subsection">
+      <p class="subsection-text">We arrive by boat or floatplane. The engine fades and everything becomes water and forest.</p>
+     </div>
+
+     <div class="subsection">
+      <h3 class="subsection-title">Daily Life</h3>
+      <div class="list-item">Coffee across the inlet</div>
+      <div class="list-item">Kayaks on still water</div>
+      <div class="list-item">Short rainforest walks</div>
+      <div class="list-item">Rain on the roof</div>
+      <div class="list-item">Watching wildlife in the evenings</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1472791108553-c9405341e398?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">The Place</h3>
+      <div class="list-item">Remote coastal rainforest</div>
+      <div class="list-item">No roads</div>
+      <div class="list-item">Best in summer</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">Where We Could Stay</h3>
+      <div class="action-buttons">
+        <a href="https://greatbeartours.com/great-bear-lodge/" target="_blank" rel="noopener noreferrer" class="action-btn">Great Bear</a>
+        <a href="https://nimmobay.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Nimmo Bay</a>
+        <a href="https://klahooseresort.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Klahoose</a>
+      </div>
+     </div>
+
+     <div class="nav-divider">
+      <a href="https://earth.google.com/web/search/Great+Bear+Rainforest,+British+Columbia,+Canada" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+      <a href="https://www.tripadvisor.com/Attractions-g154943-Activities-British_Columbia.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      <button class="nav-scroll-btn" onclick="document.getElementById('option2').scrollIntoView({behavior: 'smooth'})">Next →</button>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1526481280691-3c469b5f8f2c?w=1600&h=900&fit=crop'); margin-top: 80px;"></div>
+   </div>
+  </div>
+
+  <div class="destination-wrapper" id="option2">
+   <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1439066615861-d1af74d74000?w=1600&h=900&fit=crop');">
+    <div class="destination-hero-content">
+     <div class="section-label">Option 2</div>
+     <h2 class="destination-title">Interior Quiet</h2>
+     <p class="destination-subtitle">Chilcotin, British Columbia</p>
+    </div>
+   </div>
+
+   <div class="destination-content">
+    <div class="content-wrapper">
+     <div class="subsection">
+      <p class="subsection-text">A cabin beside a lake. Huge sky. Nights full of stars.</p>
+     </div>
+
+     <div class="subsection">
+      <h3 class="subsection-title">Daily Life</h3>
+      <div class="list-item">Slow mornings outdoors</div>
+      <div class="list-item">Walking lakeshores</div>
+      <div class="list-item">Swimming in summer</div>
+      <div class="list-item">Campfires at night</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1501785888041-af3ef285b470?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">The Place</h3>
+      <div class="list-item">Remote interior plateau</div>
+      <div class="list-item">Quiet and open</div>
+      <div class="list-item">Easy to settle into</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1508264165352-258a6e62245a?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">Where We Could Stay</h3>
+      <div class="action-buttons">
+        <a href="https://www.chilkoexperience.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Chilko</a>
+        <a href="https://echo-valley.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Echo Valley</a>
+        <a href="https://www.tyax.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Tyax</a>
+      </div>
+     </div>
+
+     <div class="nav-divider">
+      <a href="https://earth.google.com/web/search/Chilcotin,+British+Columbia,+Canada" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+      <a href="https://www.tripadvisor.com/Attractions-g154943-Activities-c61-British_Columbia.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      <button class="nav-scroll-btn" onclick="document.getElementById('option3').scrollIntoView({behavior: 'smooth'})">Next →</button>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600&h=900&fit=crop'); margin-top: 80px;"></div>
+   </div>
+  </div>
+
+  <div class="destination-wrapper" id="option3">
+   <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1505142468610-359e7d316be0?w=1600&h=900&fit=crop');">
+    <div class="destination-hero-content">
+     <div class="section-label">Option 3</div>
+     <h2 class="destination-title">Ocean Cliffs</h2>
+     <p class="destination-subtitle">Gros Morne, Newfoundland</p>
+    </div>
+   </div>
+
+   <div class="destination-content">
+    <div class="content-wrapper">
+     <div class="subsection">
+      <p class="subsection-text">Rock, sea air, and wide horizons.</p>
+     </div>
+
+     <div class="subsection">
+      <h3 class="subsection-title">Daily Life</h3>
+      <div class="list-item">Coastal hikes</div>
+      <div class="list-item">Boat trips through fjords</div>
+      <div class="list-item">Long evenings by the water</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">The Place</h3>
+      <div class="list-item">Wild coastline</div>
+      <div class="list-item">Accessible but peaceful</div>
+      <div class="list-item">Best in late summer</div>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1500534623283-312aade485b7?w=1600&h=900&fit=crop');"></div>
+
+    <div class="content-wrapper">
+     <div class="subsection">
+      <h3 class="subsection-title">Where We Could Stay</h3>
+      <div class="action-buttons">
+        <a href="https://www.grosmornecabins.com/" target="_blank" rel="noopener noreferrer" class="action-btn">GM Cabins</a>
+        <a href="https://www.neddiesharbourinn.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Neddies Inn</a>
+        <a href="https://www.bonnebaycottages.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Bonne Bay</a>
+      </div>
+     </div>
+
+     <div class="nav-divider">
+      <a href="https://earth.google.com/web/search/Gros+Morne+National+Park,+Newfoundland,+Canada" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+      <a href="https://www.tripadvisor.com/Attractions-g182194-Activities-Gros_Morne_National_Park_Newfoundland_Newfoundland_and_Labrador.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      <button class="nav-scroll-btn" onclick="document.getElementById('option4').scrollIntoView({behavior: 'smooth'})">Next →</button>
+     </div>
+    </div>
+
+    <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1469474968028-56623f02e42e?w=1600&h=900&fit=crop'); margin-top: 80px;"></div>
+   </div>
+  </div>
+
+  <div id="option4" style="background: #0a0f14; position: relative; z-index: 1;">
+   <div class="section" style="background: linear-gradient(180deg, #0a0f14 0%, #1a2835 100%);">
+    <div class="content">
+     <p class="intro-main">Live There Instead</p>
+     <p class="intro-text">Maybe we don't visit a place. Maybe we temporarily live in one.</p>
+     <p class="intro-text">Stay longer. Shop once. Let days form naturally.</p>
+    </div>
+   </div>
+
+   <div class="destination-wrapper">
+    <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1432405972618-c60b0225b8f9?w=1600&h=900&fit=crop');">
+     <div class="destination-hero-content">
+      <div class="section-label">Long Stay Option 1</div>
+      <h2 class="destination-title">Off-Grid Cabin Life</h2>
+     </div>
+    </div>
+
+    <div class="destination-content">
+     <div class="content-wrapper">
+      <div class="subsection">
+       <p class="subsection-text">No electricity. No internet. Just quiet and the sounds of the place.</p>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1511632765486-a01980e01a18?w=1600&h=900&fit=crop');"></div>
+
+      <div class="subsection">
+       <h3 class="subsection-title">Where We Could Stay</h3>
+       <div class="action-buttons">
+         <a href="https://www.backcountrycanadatravel.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Backcountry Canada</a>
+       </div>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&h=900&fit=crop');"></div>
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1500534314209-a25ddb2bd429?w=1600&h=900&fit=crop');"></div>
+
+      <div class="nav-divider">
+        <a href="https://earth.google.com/web/search/Yukon,+Canada" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+        <a href="https://www.tripadvisor.com/Attractions-g155041-Activities-Yukon.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <div class="option-divider"></div>
+   <div class="destination-wrapper">
+    <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1419242902214-272b3f66ee7a?w=1600&h=900&fit=crop');">
+     <div class="destination-hero-content">
+      <div class="section-label">Long Stay Option 2</div>
+      <h2 class="destination-title">Glass Domes &amp; Tiny Cabins</h2>
+     </div>
+    </div>
+
+    <div class="destination-content">
+     <div class="content-wrapper">
+      <div class="subsection">
+       <p class="subsection-text">Sleep under stars. Wake to forest. Modern comfort in the middle of nowhere.</p>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1508264165352-258a6e62245a?w=1600&h=900&fit=crop');"></div>
+
+      <div class="subsection">
+       <h3 class="subsection-title">Where We Could Stay</h3>
+       <div class="action-buttons">
+         <a href="https://www.domeliving.com/" target="_blank" rel="noopener noreferrer" class="action-btn">Dome Living</a>
+       </div>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1526481280691-3c469b5f8f2c?w=1600&h=900&fit=crop');"></div>
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1519681393784-d120267933ba?w=1600&h=900&fit=crop');"></div>
+
+      <div class="nav-divider">
+        <a href="https://earth.google.com/web/search/Quebec+forest,+Canada" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+        <a href="https://www.tripadvisor.com/Attractions-g155032-Activities-Quebec.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      </div>
+     </div>
+    </div>
+   </div>
+
+   <div class="option-divider"></div>
+   <div class="destination-wrapper">
+    <div class="destination-hero" style="background-image: url('https://images.unsplash.com/photo-1470770841072-f978cf4d019e?w=1600&h=900&fit=crop');">
+     <div class="destination-hero-content">
+      <div class="section-label">Long Stay Option 3</div>
+      <h2 class="destination-title">Indigenous Hosted</h2>
+     </div>
+    </div>
+
+    <div class="destination-content">
+     <div class="content-wrapper">
+      <div class="subsection">
+       <p class="subsection-text">Learn a place through the people who know it. Stories, traditions, and land.</p>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1500530855697-b586d89ba3ee?w=1600&h=900&fit=crop');"></div>
+
+      <div class="subsection">
+       <h3 class="subsection-title">Where We Could Stay</h3>
+       <div class="action-buttons">
+         <a href="https://klahooseresort.com/indigenous-experiences/" target="_blank" rel="noopener noreferrer" class="action-btn">Klahoose</a>
+       </div>
+      </div>
+
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1433086720933-d4b26b8c9088?w=1600&h=900&fit=crop');"></div>
+      <div class="image-section" style="background-image: url('https://images.unsplash.com/photo-1472791108553-c9405341e398?w=1600&h=900&fit=crop');"></div>
+
+      <div class="nav-divider">
+        <a href="https://earth.google.com/web/search/Desolation+Sound,+British+Columbia" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Explore 3D →</a>
+        <a href="https://www.tripadvisor.com/Attractions-g182180-Activities-Sunshine_Coast_British_Columbia.html" target="_blank" rel="noopener noreferrer" class="nav-scroll-btn">Things to Do →</a>
+      </div>
+     </div>
+    </div>
+   </div>
+  </div>
+
+  <div class="section section-closing">
+   <div class="content">
+    <p class="closing-main">Somewhere in these pages is a version of us for a little while.</p>
+    <p class="closing-sub">When you feel it, just leave a heart on that page.</p>
+    <p class="closing-sub">That's the one we'll talk about first.</p>
+   </div>
+  </div>
+
+  <button class="heart-btn" id="heartBtn" onclick="toggleHeart()" title="Mark your favorite">♡</button>
+
+  <script>
+    function toggleHeart() {
+      const btn = document.getElementById('heartBtn');
+      btn.classList.toggle('active');
+
+      if (btn.classList.contains('active')) {
+        btn.textContent = '♥';
+        localStorage.setItem('wilderness-heart', 'true');
+      } else {
+        btn.textContent = '♡';
+        localStorage.setItem('wilderness-heart', 'false');
+      }
+    }
+
+    window.addEventListener('load', () => {
+      const saved = localStorage.getItem('wilderness-heart');
+      const btn = document.getElementById('heartBtn');
+      if (saved === 'true') {
+        btn.classList.add('active');
+        btn.textContent = '♥';
+      }
+    });
+  </script>
+
+ </body>
+</html>
